@@ -1,0 +1,103 @@
+// Mapeamento de Pinos
+const int S4R = 2,  S4G = 3;
+const int S3R = 4,  S3Y = 5,  S3G = 6;
+const int S2R = 7,  S2Y = 8,  S2G = 9;
+const int S1R = 10, S1Y = 11, S1G = 12;
+
+// Funções Auxiliares (Modularização)
+void setS1(int r, int y, int g) { 
+  digitalWrite(S1R, r); 
+  digitalWrite(S1Y, y); 
+  digitalWrite(S1G, g); 
+}
+
+void setS2(int r, int y, int g) { 
+  digitalWrite(S2R, r); 
+  digitalWrite(S2Y, y); 
+  digitalWrite(S2G, g); 
+}
+
+void setS3(int r, int y, int g) { 
+  digitalWrite(S3R, r); 
+  digitalWrite(S3Y, y); 
+  digitalWrite(S3G, g); 
+}
+
+void setS4(int r, int g) { 
+  digitalWrite(S4R, r); 
+  digitalWrite(S4G, g); 
+}
+
+void setup() {
+  // Configura todos os pinos (do 2 ao 12) como SAÍDA e desliga todos
+  for (int i = 2; i <= 12; i++) {
+    pinMode(i, OUTPUT);
+    digitalWrite(i, LOW);
+  }
+}
+
+void loop() {
+  // Estado 1: s1 vermelho - s2 verde - s3 vermelho - s4 verde
+  // s2 permitido baixo > cima | s4 permitido baixo > esquerda e baixo
+  setS1(1, 0, 0);
+  setS2(0, 0, 1);
+  setS3(1, 0, 0);
+  setS4(0, 1);
+  delay(5000); 
+
+  // Estado 2: s1 vermelho - s2 verde - s3 vermelho - s4 vermelho
+  // s4 fecha antes de s2; s1 não fica verde imediatamente para o cruzamento esvaziar
+  setS1(1, 0, 0);
+  setS2(0, 0, 1);
+  setS3(1, 0, 0);
+  setS4(1, 0);
+  delay(1000);
+
+  // Estado 3: s1 verde - s2 verde - s3 vermelho - s4 vermelho
+  // s1 permitido cima > baixo e cima > esquerda | s2 permitido baixo > cima
+  setS1(0, 0, 1);
+  setS2(0, 0, 1);
+  setS3(1, 0, 0);
+  setS4(1, 0);
+  delay(5000);
+
+  // Estado 4: s1 amarelo - s2 amarelo - s3 vermelho - s4 vermelho
+  // Transição da avenida inteira
+  setS1(0, 1, 0);
+  setS2(0, 1, 0);
+  setS3(1, 0, 0);
+  setS4(1, 0);
+  delay(2000);
+
+  // Estado 5: s1 vermelho - s2 vermelho - s3 vermelho - s4 vermelho
+  // s3 não fica verde imediatamente para dar tempo dos carros de s1 e s2 terminarem a travessia
+  setS1(1, 0, 0);
+  setS2(1, 0, 0);
+  setS3(1, 0, 0);
+  setS4(1, 0);
+  delay(1000);
+
+  // Estado 6: s1 vermelho - s2 vermelho - s3 verde - s4 vermelho
+  // s3 permitido direita > esquerda, direita > cima e direita > baixo
+  setS1(1, 0, 0);
+  setS2(1, 0, 0);
+  setS3(0, 0, 1);
+  setS4(1, 0);
+  delay(10000);
+
+  // Estado 7: s1 vermelho - s2 vermelho - s3 amarelo - s4 vermelho
+  // Transição da rua transversal
+  setS1(1, 0, 0);
+  setS2(1, 0, 0);
+  setS3(0, 1, 0);
+  setS4(1, 0);
+  delay(2000);
+
+  // Estado 8: s1 vermelho - s2 vermelho - s3 vermelho - s4 vermelho
+  // s2 e s4 não ficam verdes imediatamente para dar tempo dos carros de s3 terminarem a travessia
+  setS1(1, 0, 0);
+  setS2(1, 0, 0);
+  setS3(1, 0, 0);
+  setS4(1, 0);
+  delay(1000);
+}

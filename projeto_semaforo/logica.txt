@@ -1,0 +1,43 @@
+#Estado 1: 
+- s1 vermelho - s2 verde - s3 vermelho - s4 verde
+>s2 permitido baixo > cima
+>s4 permitido baixo > esquerda
+>s4 permitido baixo > esquerda > baixo
+
+#Estado 2:
+- s1 vermelho - s2 verde - s3 vermelho - s4 vermelho
+>s2 permitido baixo > cima
+>s4 fecha antes de s2 como pedido no projeto
+>s1 não fica verde imediatamente ao s4 ficar vermelho para dar tempo para os carros de s4 terminarem a conversão
+
+#Estado 3:
+- s1 verde - s2 verde - s3 vermelho - s4 vermelho
+>s1 permitido cima > baixo
+>s1 permitido cima > esquerda
+>s2 permitido baixo > cima
+
+#Estado 4:
+- s1 amarelo - s2 amarelo - s3 vermelho - s4 vermelho
+>s1 permitido cima > baixo
+>s1 permitido cima > esquerda
+>s2 permitido baixo > cima
+
+#Estado 5:
+- s1 vermelho - s2 vermelho - s3 vermelho - s4 vermelho
+>s3 não fica verde imediatamente para dar tempo para os carros de s1 e s2 terminarem a conversão
+
+#Estado 6:
+- s1 vermelho - s2 vermelho - s3 verde - s4 vermelho
+>s3 permitido direita > esquerda
+>s3 permitido direita > cima
+>s3 permitido direita > baixo
+
+#Estado 7:
+- s1 vermelho - s2 vermelho - s3 amarelo - s4 vermelho
+>s3 permitido direita > esquerda
+>s3 permitido direita > cima
+>s3 permitido direita > baixo
+
+#Estado 8:
+- s1 vermelho - s2 vermelho - s3 vermelho - s4 vermelho
+>s2 e s4 não ficam verde imediatamente para dar tempo para os carros de s3 terminarem a conversão
